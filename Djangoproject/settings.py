@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-lm^ni2=hshn!5%0gydp7g&j1ymq(u9l3=47r@ar_j&zgm+&%bw
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -47,7 +47,11 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    
+    
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -127,6 +131,12 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 MEDIA_ROOT = '/media/'
+
+
+
+STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 
 
 AUTH_USER_MODEL = 'authentication.User'
