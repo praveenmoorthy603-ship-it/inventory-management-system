@@ -1,0 +1,275 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+
+    body{
+        background: linear-gradient(
+            135deg,
+            #eef2ff,
+            #f8fafc
+        );
+    }
+
+    .main-card{
+        border: none;
+        border-radius: 25px;
+        overflow: hidden;
+        background-color: white;
+        transition: 0.4s;
+    }
+
+    .main-card:hover{
+        transform: translateY(-5px);
+        box-shadow: 0px 15px 35px rgba(0,0,0,0.1);
+    }
+
+    .page-title{
+        font-weight: bold;
+        color: #0d6efd;
+    }
+
+    .sub-title{
+        color: gray;
+        font-size: 15px;
+    }
+
+    .custom-btn{
+        border-radius: 12px;
+        padding: 10px 20px;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+    .custom-btn:hover{
+        transform: scale(1.08);
+    }
+
+    .table{
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+    .table thead{
+        background: linear-gradient(
+            to right,
+            #0d6efd,
+            #4f46e5
+        );
+        color: white;
+    }
+
+    .table tbody tr{
+        transition: 0.3s;
+    }
+
+    .table tbody tr:hover{
+        background-color: #eef4ff;
+        transform: scale(1.01);
+    }
+
+    .customer-name{
+        font-weight: bold;
+        color: #212529;
+    }
+
+    .info-box{
+        border-radius: 20px;
+        background: white;
+        transition: 0.4s;
+    }
+
+    .info-box:hover{
+        transform: translateY(-4px);
+        box-shadow: 0px 10px 25px rgba(0,0,0,0.1);
+    }
+
+</style>
+
+<div class="container mt-5">
+
+    <div class="card shadow-lg main-card">
+
+        <div class="card-body p-5">
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+
+                <div>
+
+                    <h1 class="page-title">
+                        Customer Dashboard
+                    </h1>
+
+                    <p class="sub-title">
+                        Manage customer details professionally
+                    </p>
+
+                </div>
+                {% if request.user.role == 0 %}
+                <a href="/orders/customer/add/">
+
+                    <button class="btn btn-primary custom-btn shadow">
+
+                        + Add Customer
+
+                    </button>
+
+                </a>
+                {% endif %}
+            </div>
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle shadow-sm">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Customer Name</th>
+                            <th>Customer Since</th>
+                            <th class="text-center">Update</th>
+                            <th class="text-center">Delete</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for customer in customer_list %}
+
+                        <tr>
+
+                            <td class="customer-name">
+                                {{ customer.customer_name }}
+                            </td>
+
+                            <td>
+                                {{ customer.customer_since }}
+                            </td>
+
+                            <td class="text-center">
+
+                                <a href="{% url 'update_customer' customer.id %}">
+
+                                    <button class="btn btn-warning custom-btn btn-sm">
+
+                                        Update
+
+                                    </button>
+
+                                </a>
+
+                            </td>
+
+                            <td class="text-center">
+
+                                <a href="{% url 'delete_customer' customer.id %}">
+
+                                    <button class="btn btn-danger custom-btn btn-sm">
+
+                                        Delete
+
+                                    </button>
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+
+                            <td colspan="4" class="text-center py-5 text-muted">
+
+                                No customers found
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row mt-4">
+
+        <div class="col-lg-4 mb-3">
+
+            <div class="p-4 info-box shadow-sm">
+
+                <h5 class="fw-bold text-primary">
+                    Total Customers
+                </h5>
+
+                <h2>
+                    {{ customer_list|length }}
+                </h2>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-4 mb-3">
+
+            <div class="p-4 info-box shadow-sm">
+
+                <h5 class="fw-bold text-success">
+                    Active Records
+                </h5>
+
+                <p class="mb-0">
+                    All customer records are securely maintained.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-4 mb-3">
+
+            <div class="p-4 info-box shadow-sm">
+
+                <h5 class="fw-bold text-danger">
+                    System Status
+                </h5>
+
+                <p class="mb-0">
+                    Customer management system is running smoothly.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,352 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+
+    .product-card{
+        border: none;
+        border-radius: 25px;
+        overflow: hidden;
+        background-color: white;
+        transition: 0.4s;
+    }
+
+    .product-card:hover{
+        transform: translateY(-5px);
+        box-shadow: 0px 15px 35px rgba(0,0,0,0.1);
+    }
+
+    .page-title{
+        font-weight: bold;
+        color: #0d6efd;
+    }
+
+    .sub-title{
+        color: gray;
+        font-size: 15px;
+    }
+
+    .custom-btn{
+        border-radius: 12px;
+        padding: 10px 18px;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+    .custom-btn:hover{
+        transform: scale(1.08);
+    }
+
+    .table{
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+    .table thead{
+        background: linear-gradient(
+            to right,
+            #0d6efd,
+            #4f46e5
+        );
+        color: white;
+    }
+
+    .table tbody tr{
+        transition: 0.3s;
+    }
+
+    .table tbody tr:hover{
+        background-color: #eef4ff;
+        transform: scale(1.01);
+    }
+
+    .product-image{
+        width: 90px;
+        height: 90px;
+        object-fit: cover;
+        border-radius: 15px;
+        transition: 0.3s;
+        border: 3px solid #dee2e6;
+    }
+
+    .product-image:hover{
+        transform: scale(1.1);
+    }
+
+    .price-text{
+        font-weight: bold;
+        color: #198754;
+    }
+
+    .gst-text{
+        font-weight: bold;
+        color: #dc3545;
+    }
+
+    .info-box{
+        border-radius: 20px;
+        background: white;
+        transition: 0.4s;
+    }
+
+    .info-box:hover{
+        transform: translateY(-4px);
+        box-shadow: 0px 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .file-badge{
+        background-color: #e9f2ff;
+        color: #0d6efd;
+        padding: 8px 12px;
+        border-radius: 10px;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+</style>
+
+<div class="container mt-5">
+
+    <div class="card shadow-lg product-card">
+
+        <div class="card-body p-4">
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+
+                <div>
+
+                    <h1 class="page-title">
+                        Product Dashboard
+                    </h1>
+
+                    <p class="sub-title">
+                        Manage products, pricing, files and inventory records
+                    </p>
+
+                </div>
+                {% if request.user.role == 0 %}
+                <a href="/inventory/products/add/">
+
+                    <button class="btn btn-primary custom-btn shadow">
+
+                        + Add Product
+
+                    </button>
+
+                </a>
+                {% endif %}
+
+            </div>
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle shadow-sm">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Product</th>
+                            <th>Code</th>
+                            <th>Price</th>
+                            <th>GST</th>
+                            <th>Food</th>
+                            <th>Picture</th>
+                            <th>File</th>
+                            <th class="text-center">Update</th>
+                            <th class="text-center">Delete</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for product in product_list %}
+
+                        <tr>
+
+                            <td class="fw-semibold">
+                                {{ product.product_name }}
+                            </td>
+
+                            <td>
+                                {{ product.product_code }}
+                            </td>
+
+                            <td class="price-text">
+                                ₹ {{ product.price }}
+                            </td>
+
+                            <td class="gst-text">
+                                {{ product.gst }} %
+                            </td>
+
+                            <td>
+
+                                {% if product.food_product %}
+
+                                <span class="badge bg-success">
+                                    Yes
+                                </span>
+
+                                {% else %}
+
+                                <span class="badge bg-danger">
+                                    No
+                                </span>
+
+                                {% endif %}
+
+                            </td>
+{% comment %} 
+                            <td>
+
+                                {% if product.picture %}
+
+                                <img 
+                                    src="{{ product.picture.url }}" 
+                                    alt="Thumbnail"
+                                    class="product-image"
+                                >
+
+                                {% else %}
+
+                                <span class="text-muted">
+                                    No picture
+                                </span>
+
+                                {% endif %}
+
+                            </td>
+
+                            <td>
+
+                                {% if product.file %}
+
+                                <span class="file-badge">
+
+                                    {{ product.file.name }}
+
+                                </span>
+
+                                {% else %}
+
+                                <span class="text-muted">
+                                    No file
+                                </span>
+
+                                {% endif %}
+
+                            </td> {% endcomment %}
+
+                            <td class="text-center">
+
+                                <a href="{% url 'update_product' product.id %}">
+
+                                    <button class="btn btn-warning btn-sm custom-btn">
+
+                                        Update
+
+                                    </button>
+
+                                </a>
+
+                            </td>
+
+                            <td class="text-center">
+
+                                <a href="{% url 'delete_product' product.id %}">
+
+                                    <button class="btn btn-danger btn-sm custom-btn">
+
+                                        Delete
+
+                                    </button>
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+
+                            <td colspan="9" class="text-center py-5 text-muted">
+
+                                No products available
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row mt-4">
+
+        <div class="col-lg-4 mb-3">
+
+            <div class="p-4 info-box shadow-sm">
+
+                <h5 class="fw-bold text-primary">
+                    Total Products
+                </h5>
+
+                <h2>
+                    {{ product_list|length }}
+                </h2>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-4 mb-3">
+
+            <div class="p-4 info-box shadow-sm">
+
+                <h5 class="fw-bold text-success">
+                    Inventory Status
+                </h5>
+
+                <p class="mb-0">
+                    Product records and inventory files are maintained securely.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-4 mb-3">
+
+            <div class="p-4 info-box shadow-sm">
+
+                <h5 class="fw-bold text-danger">
+                    Product Analytics
+                </h5>
+
+                <p class="mb-0">
+                    Track pricing, GST, images and uploaded files efficiently.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

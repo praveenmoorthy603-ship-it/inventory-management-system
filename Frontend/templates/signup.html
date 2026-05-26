@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Page</title>
+
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+    <style>
+
+        body{
+            background: linear-gradient(
+                135deg,
+                #eef2ff,
+                #f8fafc
+            );
+
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .signup-card{
+            border: none;
+            border-radius: 25px;
+            overflow: hidden;
+            background-color: white;
+            transition: 0.4s;
+        }
+
+        .signup-card:hover{
+            transform: translateY(-6px);
+            box-shadow: 0px 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .signup-title{
+            font-weight: bold;
+            color: #0d6efd;
+        }
+
+        .sub-title{
+            color: gray;
+            font-size: 15px;
+        }
+
+        .form-control{
+            border-radius: 12px;
+            padding: 12px;
+            transition: 0.3s;
+        }
+
+        .form-control:focus{
+            transform: scale(1.02);
+            box-shadow: 0px 0px 12px rgba(13,110,253,0.3);
+        }
+
+        .signup-btn{
+            width: 100%;
+            border-radius: 12px;
+            padding: 12px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .signup-btn:hover{
+            transform: scale(1.05);
+        }
+
+        .signup-image{
+            width: 90px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .error-text{
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .role-select{
+            cursor: pointer;
+        }
+
+        .input-label{
+            font-weight: 600;
+            color: #374151;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-6">
+
+                <div class="card shadow-lg signup-card">
+
+                    <div class="card-body p-5">
+
+                        <div class="text-center mb-4">
+
+                            <img 
+                                src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+                                class="signup-image"
+                            >
+
+                            <h2 class="signup-title">
+                                Create Account
+                            </h2>
+
+                            <p class="sub-title">
+                                Register and access your management dashboard
+                            </p>
+
+                        </div>
+
+                        <form action="" method="POST">
+
+                            {% csrf_token %}
+
+                            <div class="mb-3">
+
+                                <label class="form-label input-label">
+                                    Username
+                                </label>
+
+                                <input 
+                                    type="text"
+                                    class="form-control"
+                                    name="username"
+                                    placeholder="Enter username"
+                                    required
+                                >
+
+                            </div>
+
+                            <p class="text-danger error-text">
+                                {{ error }}
+                            </p>
+
+                            <div class="mb-3">
+
+                                <label class="form-label input-label">
+                                    Password
+                                </label>
+
+                                <input 
+                                    type="password"
+                                    class="form-control"
+                                    name="password"
+                                    placeholder="Enter password"
+                                    required
+                                >
+
+                            </div>
+
+                            <div class="mb-3">
+
+                                <label class="form-label input-label">
+                                    First Name
+                                </label>
+
+                                <input 
+                                    type="text"
+                                    class="form-control"
+                                    name="first_name"
+                                    placeholder="Enter first name"
+                                    required
+                                >
+
+                            </div>
+
+                            <div class="mb-3">
+
+                                <label class="form-label input-label">
+                                    Last Name
+                                </label>
+
+                                <input 
+                                    type="text"
+                                    class="form-control"
+                                    name="last_name"
+                                    placeholder="Enter last name"
+                                    required
+                                >
+
+                            </div>
+
+                            <div class="mb-3">
+
+                                <label class="form-label input-label">
+                                    Email
+                                </label>
+
+                                <input 
+                                    type="email"
+                                    class="form-control"
+                                    name="email"
+                                    placeholder="Enter email address"
+                                    required
+                                >
+
+                            </div>
+
+                            <div class="mb-3">
+
+                                <label class="form-label input-label">
+                                    Age
+                                </label>
+
+                                <input 
+                                    type="number"
+                                    class="form-control"
+                                    name="age"
+                                    placeholder="Enter age"
+                                    required
+                                >
+
+                            </div>
+
+                            <div class="mb-4">
+
+                                <label class="form-label input-label">
+                                    User Role
+                                </label>
+
+                                <select 
+                                    class="form-control role-select"
+                                    name="role"
+                                >
+
+                                    <option value="0">
+                                        Admin
+                                    </option>
+
+                                    <option value="1">
+                                        Manager
+                                    </option>
+
+                                    <option value="2">
+                                        Employee
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <button 
+                                type="submit"
+                                class="btn btn-primary signup-btn shadow"
+                            >
+
+                                Create Account
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

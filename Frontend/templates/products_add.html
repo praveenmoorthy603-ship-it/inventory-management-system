@@ -1,0 +1,225 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+
+    body{
+        background: linear-gradient(
+            135deg,
+            #eef2ff,
+            #f8fafc
+        );
+    }
+
+    .product-card{
+        border: none;
+        border-radius: 25px;
+        overflow: hidden;
+        background-color: white;
+        transition: 0.4s;
+    }
+
+    .product-card:hover{
+        transform: translateY(-5px);
+        box-shadow: 0px 15px 35px rgba(0,0,0,0.1);
+    }
+
+    .page-title{
+        font-weight: bold;
+        color: #0d6efd;
+    }
+
+    .sub-title{
+        color: gray;
+        font-size: 15px;
+    }
+
+    .custom-btn{
+        border-radius: 12px;
+        padding: 10px 20px;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+    .custom-btn:hover{
+        transform: scale(1.08);
+    }
+
+    form p{
+        margin-bottom: 18px;
+    }
+
+    form label{
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #374151;
+    }
+
+    form input,
+    form select,
+    form textarea{
+
+        width: 100%;
+
+        padding: 12px;
+
+        border-radius: 12px;
+
+        border: 1px solid #ced4da;
+
+        transition: 0.3s;
+    }
+
+    form input:focus,
+    form select:focus,
+    form textarea:focus{
+
+        outline: none;
+
+        transform: scale(1.02);
+
+        box-shadow: 0px 0px 12px rgba(13,110,253,0.3);
+
+        border-color: #0d6efd;
+    }
+
+    input[type="file"]{
+
+        background-color: #f8fafc;
+        cursor: pointer;
+    }
+
+    .info-box{
+        border-radius: 20px;
+        background-color: white;
+        transition: 0.4s;
+    }
+
+    .info-box:hover{
+        transform: translateY(-4px);
+        box-shadow: 0px 10px 25px rgba(0,0,0,0.1);
+    }
+
+</style>
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="card shadow-lg product-card">
+
+                <div class="card-body p-5">
+
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+
+                        <div>
+
+                            <h2 class="page-title">
+                                Add Product
+                            </h2>
+
+                            <p class="sub-title">
+                                Create products, upload files and manage inventory professionally
+                            </p>
+
+                        </div>
+
+                        <a href="/inventory/products/">
+
+                            <button class="btn btn-secondary custom-btn shadow">
+
+                                ← Back
+
+                            </button>
+
+                        </a>
+
+                    </div>
+
+                    <form 
+                        action="" 
+                        method="POST"
+                        enctype="multipart/form-data"
+                    >
+
+                        {% csrf_token %}
+
+                        {{ product_form.as_p }}
+
+                        <button 
+                            type="submit"
+                            class="btn btn-primary custom-btn shadow w-100 mt-3"
+                        >
+
+                            Add Product
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row mt-4">
+
+        <div class="col-lg-4 mb-3">
+
+            <div class="p-4 info-box shadow-sm">
+
+                <h5 class="fw-bold text-primary">
+                    Product Management
+                </h5>
+
+                <p class="mb-0">
+                    Organize and maintain product details efficiently.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-4 mb-3">
+
+            <div class="p-4 info-box shadow-sm">
+
+                <h5 class="fw-bold text-success">
+                    File Upload System
+                </h5>
+
+                <p class="mb-0">
+                    Upload images and files securely into the inventory system.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-4 mb-3">
+
+            <div class="p-4 info-box shadow-sm">
+
+                <h5 class="fw-bold text-danger">
+                    Inventory Analytics
+                </h5>
+
+                <p class="mb-0">
+                    Manage pricing, GST and product information professionally.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

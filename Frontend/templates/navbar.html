@@ -1,0 +1,184 @@
+<nav class="navbar navbar-expand-lg navbar-dark shadow-lg custom-navbar">
+
+    <div class="container-fluid px-4">
+
+        <a class="navbar-brand fw-bold fs-4 brand-logo" href="#">
+
+            Billing System
+
+        </a>
+
+        <button 
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+
+            <ul class="navbar-nav ms-auto align-items-center">
+
+                {% if request.user.role == 0 or request.user.role == 1 %}
+
+                <li class="nav-item">
+
+                    <a class="nav-link nav-custom active" 
+                       href="/orders/all/customers/">
+
+                        Customers
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link nav-custom active" 
+                       href="/inventory/products/">
+
+                        Products
+
+                    </a>
+
+                </li>
+
+                {% endif %}
+
+                <li class="nav-item">
+
+                    <a class="nav-link nav-custom active" 
+                       href="/orders/orders/">
+
+                        Orders
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link nav-custom active" 
+                       href="/signup/">
+
+                        Create User
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item ms-2">
+
+                    <a href="/logout/" 
+                       class="btn btn-danger logout-btn">
+
+                        Logout
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+<style>
+
+    .custom-navbar{
+
+        background: linear-gradient(
+            to right,
+            #0f172a,
+            #1e293b
+        );
+
+        padding-top: 12px;
+        padding-bottom: 12px;
+
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+
+    .brand-logo{
+
+        letter-spacing: 1px;
+        transition: 0.3s;
+    }
+
+    .brand-logo:hover{
+
+        transform: scale(1.05);
+        color: #60a5fa !important;
+    }
+
+    .nav-custom{
+
+        margin-left: 12px;
+        margin-right: 12px;
+
+        font-weight: 600;
+
+        position: relative;
+
+        transition: 0.3s;
+    }
+
+    .nav-custom:hover{
+
+        color: #60a5fa !important;
+
+        transform: translateY(-2px);
+    }
+
+    .nav-custom::after{
+
+        content: "";
+
+        position: absolute;
+
+        left: 0;
+        bottom: -4px;
+
+        width: 0%;
+        height: 2px;
+
+        background-color: #60a5fa;
+
+        transition: 0.3s;
+    }
+
+    .nav-custom:hover::after{
+
+        width: 100%;
+    }
+
+    .logout-btn{
+
+        border-radius: 12px;
+
+        padding: 8px 18px;
+
+        font-weight: 600;
+
+        transition: 0.3s;
+    }
+
+    .logout-btn:hover{
+
+        transform: scale(1.08);
+
+        box-shadow: 0px 5px 15px rgba(220,53,69,0.4);
+    }
+
+</style>

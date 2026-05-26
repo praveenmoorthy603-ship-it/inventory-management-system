@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+    <style>
+
+        body{
+            background: linear-gradient(135deg, #eef2ff, #f8fafc);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-card{
+            border: none;
+            border-radius: 25px;
+            overflow: hidden;
+            background-color: white;
+            transition: 0.4s;
+        }
+
+        .login-card:hover{
+            transform: translateY(-6px);
+            box-shadow: 0px 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .login-title{
+            font-weight: bold;
+            color: #0d6efd;
+        }
+
+        .sub-title{
+            color: gray;
+            font-size: 15px;
+        }
+
+        .form-control{
+            border-radius: 12px;
+            padding: 12px;
+            transition: 0.3s;
+        }
+
+        .form-control:focus{
+            transform: scale(1.02);
+            box-shadow: 0px 0px 10px rgba(13,110,253,0.3);
+        }
+
+        .login-btn{
+            width: 100%;
+            border-radius: 12px;
+            padding: 12px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .login-btn:hover{
+            transform: scale(1.03);
+        }
+
+        .login-image{
+            width: 90px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .error-text{
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-5 col-md-7">
+
+                <div class="card shadow-lg login-card">
+
+                    <div class="card-body p-5">
+
+                        <!-- Header Section -->
+                        <div class="text-center mb-4">
+
+                            <img
+                                src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+                                class="login-image"
+                                alt="User Image"
+                            >
+
+                            <h2 class="login-title">
+                                Welcome Back
+                            </h2>
+
+                            <p class="sub-title">
+                                Login to access your dashboard
+                            </p>
+
+                        </div>
+
+                        <!-- Login Form -->
+                        <form action="" method="POST">
+
+                            {% csrf_token %}
+
+                            <!-- Username -->
+                            <div class="mb-4">
+
+                                <label class="form-label fw-semibold">
+                                    Username
+                                </label>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    name="username"
+                                    placeholder="Enter username"
+                                >
+
+                            </div>
+
+                            <!-- Password -->
+                            <div class="mb-3">
+
+                                <label class="form-label fw-semibold">
+                                    Password
+                                </label>
+
+                                <input
+                                    type="password"
+                                    class="form-control"
+                                    name="password"
+                                    placeholder="Enter password"
+                                >
+
+                            </div>
+
+                            <!-- Error Message -->
+                            <p class="text-danger error-text">
+                                {{ error }}
+                            </p>
+
+                            <!-- Login Button -->
+                            <button
+                                type="submit"
+                                class="btn btn-outline-primary login-btn shadow mb-3"
+                            >
+                                Login
+                            </button>
+
+                            <!-- Signup Button -->
+                            <a
+                                href="/signup/"
+                                class="btn btn-outline-primary login-btn shadow"
+                            >
+                                Create User
+                            </a>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

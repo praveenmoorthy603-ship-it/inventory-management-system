@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+{% include "navbar.html" %}   <!-- this is the same for all pages -->
+
+<!-- Dynamic Content (next contents) -->
+
+
+
+{% block content %}
+<!-- Content goes here. this is unique to each page --> it's help each page to have a different content. this is the main content of the page.
+{% endblock %}
+
+<footer>
+   <p>Copyright</p>         <!-- company address , phone number, email -->
+</footer>
+    
+</body>
+</html>
+
+
+
